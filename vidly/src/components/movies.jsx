@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import Like from "./common/like";
 
 class Movies extends Component {
   state = {
@@ -13,10 +14,10 @@ class Movies extends Component {
   render() {
       // obj destructuring setin this.satte.movie as count variable
       const { length : count } = this.state.movies;
-      if(count === 0) return <p>No movie in the DB</p>
+      if(count === 0) return <p>No movies scheduled for today</p>
     return (
         <div>
-        <p>Showing { count } movies in DB</p>
+        <p>We are showing { count } movies today</p>
       <table className="table">
         <thead>
           <tr>
@@ -24,6 +25,7 @@ class Movies extends Component {
             <th>Genre</th>
             <th>Stock</th>
             <th>Rate</th>
+            <th />
             <th />
           </tr>
         </thead>
@@ -35,6 +37,10 @@ class Movies extends Component {
               <td>{movie.numberInStock}</td>
               <td>{movie.dailyRentalRate}</td>
               <td>
+                  <Like liked={true}/>
+                  </td>
+              <td>
+                
                 <button
                   onClick={() => this.handleDelete(movie)}
                   className="btn btn-danger btn-sm"
