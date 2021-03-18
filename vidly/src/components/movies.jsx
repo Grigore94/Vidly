@@ -11,6 +11,9 @@ class Movies extends Component {
     //modern js if key and value are the same we remove repetition movies: movie => movies
     this.setState({ movies });
   };
+  handleLike = () => {
+      
+  }
   render() {
       // obj destructuring setin this.satte.movie as count variable
       const { length : count } = this.state.movies;
@@ -37,7 +40,7 @@ class Movies extends Component {
               <td>{movie.numberInStock}</td>
               <td>{movie.dailyRentalRate}</td>
               <td>
-                  <Like liked={true}/>
+                  <Like liked={movie.liked} onClick={this.handleLike}/>
                   </td>
               <td>
                 
