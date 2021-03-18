@@ -7,6 +7,7 @@ class Movies extends Component {
   state = {
     movies: getMovies(),
     pageSize: 4,
+    currentPage: 1,
   };
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
@@ -21,11 +22,12 @@ class Movies extends Component {
     this.setState({ movies });
   };
   handlePageChange = (page) => {
-    console.log(page);
+    this.setState({ currentPage: page });
   };
   render() {
     // obj destructuring setin this.satte.movie as count variable
     const { length: count } = this.state.movies;
+    const { pageSize, currentPage } = this.state;
     if (count === 0) return <p>No movies scheduled for today</p>;
     return (
       <div>
@@ -68,7 +70,8 @@ class Movies extends Component {
         </table>
         <Pagination
           itemsCount={count}
-          pageSize={this.state.pageSize}
+          pageSize={pageSize}
+          currentPage={currentPage}
           onPageChengr={this.handlePageChange}
         />
       </div>
