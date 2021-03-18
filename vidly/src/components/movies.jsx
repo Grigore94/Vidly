@@ -29,6 +29,8 @@ class Movies extends Component {
     const { length: count } = this.state.movies;
     const { pageSize, currentPage } = this.state;
     if (count === 0) return <p>No movies scheduled for today</p>;
+
+    
     return (
       <div>
         <p>We are showing {count} movies today</p>
