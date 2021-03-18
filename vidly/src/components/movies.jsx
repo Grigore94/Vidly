@@ -11,7 +11,12 @@ class Movies extends Component {
     this.setState({ movies });
   };
   render() {
+      // obj destructuring setin this.satte.movie as count variable
+      const { length : count } = this.state.movies;
+      if(count === 0) return <p>No movie in the DB</p>
     return (
+        <div>
+        <p>Showing { count } movies in DB</p>
       <table className="table">
         <thead>
           <tr>
@@ -41,6 +46,7 @@ class Movies extends Component {
           ))}
         </tbody>
       </table>
+      </div>
     );
   }
 }
