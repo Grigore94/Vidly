@@ -6,18 +6,20 @@ import Like from "./common/like";
 
 class MoviesTable extends Component {
   columns = [
-    { path: "title", lablel: "Title" },
-    { path: "genre.name", lablel: "Genre" },
-    { path: "numberInStock", lablel: "Stock" },
-    { path: "dailyRentalrent", lablel: "Rent" },
+    { path: "title", label: "Title" },
+    { path: "genre.name", label: "Genre" },
+    { path: "numberInStock", label: "Stock" },
+    { path: "dailyRentalRate", label: "Rent" },
     //like and button component here as they are plain js obj added as proprties in column array replaced value seted to a fn with movie parrameter and reference this.props
     {
       key: "like",
-      content: movie => <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />,
+      content: (movie) => (
+        <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />
+      ),
     },
     {
       key: "delete",
-      content: movie => (
+      content: (movie) => (
         <button
           onClick={() => this.props.onDelete(movie)}
           className="btn btn-danger btn-sm"
@@ -37,7 +39,7 @@ class MoviesTable extends Component {
           sortColumn={sortColumn}
           onSort={onSort}
         />
-        <TableBody data={movies} />
+        <TableBody columns={this.columns} data={movies} />
       </table>
     );
   }

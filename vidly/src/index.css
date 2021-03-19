@@ -3,3 +3,9 @@ body {
   padding: 20px 0 0 0;
   font-family: sans-serif;
 }
+.pointerHeader {
+  cursor: pointer;
+}
+.list-group {
+  cursor: pointer;
+}
