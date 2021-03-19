@@ -1,21 +1,20 @@
 import React, { Component } from "react";
+import TableHeader from "./common/tableHeader";
 
 import Like from "./common/like";
 
 class MoviesTable extends Component {
-    raiseSort = path => {
-        const sortColumn = { ...this.props.sortColumn };
-    if (sortColumn.path === path)
-      //ternery operator for ascending and descending
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
-    this.props.onSort(sortColumn)
-    }
+  columns = [
+    { path: "title", lablel: "Title" },
+    { path: "genre.name", lablel: "Genre" },
+    { path: "numberInStock", lablel: "Stock" },
+    { path: "dailyRentalrent", lablel: "Rent" },
+    {},
+    {},
+  ];
+
   render() {
-    const { movies, onDelete, onLike} = this.props;
+    const { movies, onDelete, onLike } = this.props;
     return (
       <table className="table">
         <thead>
