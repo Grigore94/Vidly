@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import { getGenres } from "../services/fakeGenreService";
 import Like from "./common/like";
+import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
+    movies: [],
     pageSize: 4,
     currentPage: 1,
+    genres: [],
   };
+  componentDidMount() {
+    this.setState({movies: getMovies(), genres: getGenres()});
+  }
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
     //modern js if key and value are the same we remove repetition movies: movie => movies
@@ -25,6 +31,9 @@ class Movies extends Component {
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
+  handleGenreSelect = (genres) => {
+    console.log(genres)
+  }
   render() {
     // obj destructuring setin this.satte.movie as count variable
     const { length: count } = this.state.movies;
@@ -33,9 +42,16 @@ class Movies extends Component {
 
     const movies = paginate(allMovies, currentPage, pageSize);
     return (
-      <div>
+      <div className="row">
+        <div className="col-2">
+          <ListGroup item={this.state.genres} onitemSelect={this.handeGenreSelect}/>
+        </div>
+        <div className="col">
+       
         <p>We are showing {count} movies today</p>
+        
         <table className="table">
+        
           <thead>
             <tr>
               <th>Title</th>
@@ -46,6 +62,7 @@ class Movies extends Component {
               <th />
             </tr>
           </thead>
+          
           <tbody>
             {movies.map((movie) => (
               <tr key={movie._id}>
@@ -77,6 +94,7 @@ class Movies extends Component {
           currentPage={currentPage}
           onPageChange={this.handlePageChange}
         />
+        </div>
       </div>
     );
   }

@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 //called _ from a popular js library underscore
 import _ from "lodash";
 
 const Pagination = (props) => {
   const { itemsCount, pageSize, onPageChange, currentPage } = props;
-//   console.log(currentPage);
+  //   console.log(currentPage);
   //maping each page number
   const pageCount = Math.ceil(itemsCount / pageSize);
   //using loadash to generate an array of numbers
@@ -27,6 +28,13 @@ const Pagination = (props) => {
       </ul>
     </nav>
   );
+};
+//proptypes for reusable components to catch bugs relateted to typechecking
+Pagination.propTypes = {
+  itemsCount: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  onPageChange: PropTypes.number.isRequired,
+  currentPage: PropTypes.func.isRequired,
 };
 
 export default Pagination;
