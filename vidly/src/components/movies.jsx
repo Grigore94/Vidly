@@ -31,26 +31,35 @@ class Movies extends Component {
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
-  handleGenreSelect = (genres) => {
-    console.log(genres);
+  handleGenreSelect = (genre) => {
+    this.seState({ selectedGenre: genre });
   };
   render() {
     // obj destructuring setin this.satte.movie as count variable
     const { length: count } = this.state.movies;
-    const { pageSize, currentPage, movies: allMovies } = this.state;
+    const {
+      pageSize,
+      currentPage,
+      selectedGenre,
+      movies: allMovies,
+    } = this.state;
     if (count === 0) return <p>No movies scheduled for today</p>;
-
-    const movies = paginate(allMovies, currentPage, pageSize);
+    //ternary operator if selectedgenre is truthy we get all movies and filter them 
+    const filltered = selectedGenre
+      ? allMovies.filter((m) => m.genre_id === selectedGenre._id)
+      : allMovies;
+    const movies = paginate(filltered, currentPage, pageSize);
     return (
       <div className="row">
-        <div className="col-2">
+        <div className="col-3">
           <ListGroup
             item={this.state.genres}
-            onitemSelect={this.handeGenreSelect}
+            selectedItem={this.state.selectedGenre}
+            onItemSelect={this.handleGenreSelect}
           />
         </div>
         <div className="col">
-          <p>We are showing {count} movies today</p>
+          <p>We are showing {filltered.length} movies today</p>
 
           <table className="table">
             <thead>
@@ -90,7 +99,7 @@ class Movies extends Component {
             </tbody>
           </table>
           <Pagination
-            itemsCount={count}
+            itemsCount={filltered.length}
             pageSize={pageSize}
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
