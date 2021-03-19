@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
+import { paginate } from "../utils/paginate";
 
 class Movies extends Component {
   state = {
@@ -27,10 +28,10 @@ class Movies extends Component {
   render() {
     // obj destructuring setin this.satte.movie as count variable
     const { length: count } = this.state.movies;
-    const { pageSize, currentPage } = this.state;
+    const { pageSize, currentPage, movies: allMovies } = this.state;
     if (count === 0) return <p>No movies scheduled for today</p>;
 
-    
+    const movies = paginate(allMovies, currentPage, pageSize);
     return (
       <div>
         <p>We are showing {count} movies today</p>
@@ -46,7 +47,7 @@ class Movies extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map((movie) => (
+            {movies.map((movie) => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
@@ -74,7 +75,7 @@ class Movies extends Component {
           itemsCount={count}
           pageSize={pageSize}
           currentPage={currentPage}
-          onPageChengr={this.handlePageChange}
+          onPageChange={this.handlePageChange}
         />
       </div>
     );

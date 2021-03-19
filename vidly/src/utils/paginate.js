@@ -1,5 +1,5 @@
 //paginate function 
-import _ from "loadash";
+import _ from "lodash";
 
 export function paginate(items, pageNumber, pageSize) {
   const startIndex = (pageNumber - 1) * pageSize;

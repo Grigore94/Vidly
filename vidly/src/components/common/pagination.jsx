@@ -1,10 +1,11 @@
 import React from "react";
-//called _ from a popular js library called underscore
+//called _ from a popular js library underscore
 import _ from "lodash";
 
 const Pagination = (props) => {
-  //maping eatch page number
   const { itemsCount, pageSize, onPageChange, currentPage } = props;
+//   console.log(currentPage);
+  //maping each page number
   const pageCount = Math.ceil(itemsCount / pageSize);
   //using loadash to generate an array of numbers
   //+1 to make sure last page is also included
@@ -15,8 +16,8 @@ const Pagination = (props) => {
       <ul className="pagination">
         {pages.map((page) => (
           <li
-            key={pages}
-            className={page === currentPage ? "page-item-active" : "page-item"}
+            key={page}
+            className={page === currentPage ? "page-item active" : "page-item"}
           >
             <a className="page-link" onClick={() => onPageChange(page)}>
               {page}
