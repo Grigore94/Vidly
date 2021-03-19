@@ -63,7 +63,7 @@ class Movies extends Component {
     //ternary operator if selectedgenre is truthy we get all movies and filter them
     const filltered =
       selectedGenre && selectedGenre._id
-        ? allMovies.filter((m) => m.genre_id === selectedGenre._id)
+        ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
         : allMovies;
 
     const sorted = _.orderBy(filltered, [sortColumn.path], [sortColumn.order]);
