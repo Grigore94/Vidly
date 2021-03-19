@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 //called _ from a popular js library underscore
 import _ from "lodash";
 
-const Pagination = (props) => {
-  const { itemsCount, pageSize, onPageChange, currentPage } = props;
+const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
   //   console.log(currentPage);
   //maping each page number
   const pageCount = Math.ceil(itemsCount / pageSize);
