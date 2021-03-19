@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import Like from "./common/like";
 
 class MoviesTable extends Component {
-  raiseSort = (path) => {
-    const sortColumn = { ...this.props.sortColumn };
+    raiseSort = path => {
+        const sortColumn = { ...this.props.sortColumn };
     if (sortColumn.path === path)
       //ternery operator for ascending and descending
       sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
@@ -12,10 +12,10 @@ class MoviesTable extends Component {
       sortColumn.path = path;
       sortColumn.order = "asc";
     }
-    this.props.onSort(sortColumn);
-  };
+    this.props.onSort(sortColumn)
+    }
   render() {
-    const { movies, onDelete, onLike } = this.props;
+    const { movies, onDelete, onLike} = this.props;
     return (
       <table className="table">
         <thead>
