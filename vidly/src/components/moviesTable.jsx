@@ -10,6 +10,7 @@ class MoviesTable extends Component {
     { path: "genre.name", lablel: "Genre" },
     { path: "numberInStock", lablel: "Stock" },
     { path: "dailyRentalrent", lablel: "Rent" },
+    //like and button component here as they are plain js obj added as proprties in column array replaced value seted to a fn with movie parrameter and reference this.props
     {
       key: "like",
       content: movie => <Like liked={movie.liked} onClick={() => this.props.onLike(movie)} />,
@@ -28,7 +29,7 @@ class MoviesTable extends Component {
   ];
 
   render() {
-    const { movies, onDelete, onLike, sortColumn, onSort } = this.props;
+    const { movies, sortColumn, onSort } = this.props;
     return (
       <table className="table">
         <TableHeader
