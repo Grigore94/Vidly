@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
@@ -36,7 +36,6 @@ const NavBar = () => {
                 Rentals
               </NavLink>
             </li>
-            
           </ul>
         </div>
       </div>
