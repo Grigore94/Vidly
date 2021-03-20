@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import Input from "./common/input";
 
 class LoginForm extends Component {
-  handleSubmit = (e) => {
     state = {
       account: { username: "", password: "" },
     };
+  handleSubmit = (e) => {
     e.preventDefault();
   };
   handleChange = ({ currentTarget: input }) => {
@@ -33,8 +33,8 @@ class LoginForm extends Component {
             onChange={this.handleChange}
           />
 
-          <button className="btn btn-prinary">Login</button>
-          <button className="btn btn-prinary">SignUP</button>
+          <button className="btn btn-primary m-2">Login</button>
+         
         </form>
       </div>
     );
