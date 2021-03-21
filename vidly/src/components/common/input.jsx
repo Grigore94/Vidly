@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = (name, label, value, onChange) => {
+const Input = ({name, label, value, onChange}) => {
   return (
     <div className="form-grop">
       <label htmlFor={name}>{label}</label>
