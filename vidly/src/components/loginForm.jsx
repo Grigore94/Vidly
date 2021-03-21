@@ -65,7 +65,9 @@ class LoginForm extends Component {
             error={errors.password}
           />
 
-          <button className="btn btn-primary m-2">Login</button>
+          <button disabled={this.validate()} className="btn btn-primary m-2">
+            Login
+          </button>
         </form>
       </div>
     );
