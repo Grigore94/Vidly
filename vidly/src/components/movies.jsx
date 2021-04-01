@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Link} from "react";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
@@ -49,7 +49,7 @@ class Movies extends Component {
       selectedGenre,
       movies: allMovies,
     } = this.state;
-    //ternary operator if selectedgenre is truthy we get all movies and filter them
+    //ternary operator if selected genre is truthy we get all movies and filter them
     const filltered =
       selectedGenre && selectedGenre._id
         ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
@@ -63,7 +63,7 @@ class Movies extends Component {
   };
 
   render() {
-    // obj destructuring setin this.satte.movie as count variable
+    // obj destructuring setin this.state.movie as count variable
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, sortColumn } = this.state;
     if (count === 0) return <p>No movies scheduled for today</p>;
@@ -79,8 +79,17 @@ class Movies extends Component {
             onItemSelect={this.handleGenreSelect}
           />
         </div>
+
         <div className="col">
+          <Link
+            to="/movies/new"
+            className="btn btn-primary"
+            style={{ marginBottom: 20 }}
+          >
+            New Movie
+          </Link>
           <p>We are showing {totalCount} movies today</p>
+
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}

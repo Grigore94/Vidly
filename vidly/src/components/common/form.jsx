@@ -40,12 +40,15 @@ class Form extends Component {
     this.setState({ data, errors });
   };
   renderButton(label) {
+    return(
     <button disabled={this.validate()} className="btn btn-primary m-2">
       {label}
-    </button>;
+    </button>
+    );
   }
   renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
+    return(
     <Input
       type={type}
       name={name}
@@ -53,7 +56,8 @@ class Form extends Component {
       label={label}
       onChange={this.handleChange}
       error={errors[name]}
-    />;
+    />
+    );
   }
 }
 
