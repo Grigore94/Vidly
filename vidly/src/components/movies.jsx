@@ -57,10 +57,19 @@ class Movies extends Component {
       movies: allMovies,
     } = this.state;
     //ternary operator if selected genre is truthy we get all movies and filter them
-    const filltered =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
-        : allMovies;
+    // const filltered =
+    //   selectedGenre && selectedGenre._id
+    //     ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
+    //     : allMovies;
+
+    //new filter method for searchbox
+    let filltered = allMovies;
+    if (searchQuery)
+      filltered = allMovies.filter((m) =>
+        m.title.toLowerCase().startWith(searchQuery.toLowerCase())
+      );
+    else if (selectedGenre && selectedGenre._id)
+      filltered = allMovies.filter((m) => m.genre._id === selectedGenre._id);
 
     const sorted = _.orderBy(filltered, [sortColumn.path], [sortColumn.order]);
 
