@@ -1,5 +1,5 @@
-import React, { Component,} from "react";
-import {Link} from "react-router-dom";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
@@ -37,7 +37,10 @@ class Movies extends Component {
   };
   //setting current page to 1 when navigating through other genres
   handleGenreSelect = (genre) => {
-    this.setState({ selectedGenre: genre, currentPage: 1 });
+    this.setState({ selectedGenre: genre, selectedGenre: "", currentPage: 1 });
+  };
+  handleSearch = (query) => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
   };
   handleSort = (sortColumn) => {
     this.setState({ sortColumn });
@@ -90,7 +93,7 @@ class Movies extends Component {
             New Movie
           </Link>
           <p>We are showing {totalCount} movies today</p>
-
+          <SearchBox value={searchQuery} onChange={this.handleSearch} />
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}

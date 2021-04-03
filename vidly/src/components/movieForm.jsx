@@ -18,12 +18,8 @@ class MovieForm extends Form {
   };
   schema = {
     _id: Joi.string(),
-    title: Joi.string()
-    .required()
-    .label("Title"),
-    genreId: Joi.string()
-    .required()
-    .label("Genre"),
+    title: Joi.string().required().label("Title"),
+    genreId: Joi.string().required().label("Genre"),
     numberInStock: Joi.number()
       .required()
       .min(0)
@@ -47,6 +43,7 @@ class MovieForm extends Form {
     const movie = getMovie(movieId);
     //.replace instead of .push to to get back with an valid ID
     if (!movie) return this.props.history.replace("/not-found");
+    console.log(movie);
 
     this.setState({ data: this.mapToViewModel(movie) });
   }
