@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
+import { paginate } from "../utils/paginate";
 import MoviesTable from "./moviesTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
-import { paginate } from "../utils/paginate";
+import SearchBox from "./searchBox";
 import _ from "lodash";
 
 class Movies extends Component {
@@ -13,6 +14,7 @@ class Movies extends Component {
     movies: [],
     genres: [],
     pageSize: 4,
+    searchQuery: "",
     currentPage: 1,
     sortColumn: { path: "title", order: "asc" },
   };
