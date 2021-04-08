@@ -31,21 +31,27 @@ class MovieForm extends Form {
       .max(10)
       .label("Daily Rental Rate"),
   };
-
-  async componentDidMount() {
+  async populatedGenres() {
     const { data: genres } = await getGenres();
     this.setState({ genres });
-
+  }
+  async populateMovie() {
     const movieId = this.props.match.params.id;
     if (movieId === "new") return;
-
-    //read id parameter in the route and store it in movieID we dont need to populate with an existed obj
-    const movie = getMovie(movieId);
-    //.replace instead of .push to to get back with an valid ID
-    if (!movie) return this.props.history.replace("/not-found");
-    console.log(movie);
-
-    this.setState({ data: this.mapToViewModel(movie) });
+    //try catch block to catch the ex and redirect to not-found on 404
+    try {
+      //read id parameter in the route and store it in movieID we dont need to populate with an existed obj
+      const { data: movie } = await getMovie(movieId);
+      this.setState({ data: this.mapToViewModel(movie) });
+    } catch (ex) {
+      //.replace instead of .push to to get back with an valid ID
+      if (ex.response && ex.response.status === 404)
+        this.props.history.replace("/not-found");
+    }
+  }
+  async componentDidMount() {
+    await this.populatedGenres();
+    await this.populateMovie();
   }
   //this method gets a movie obj from server and maps to diferent kid of movie obj
   mapToViewModel(movie) {
