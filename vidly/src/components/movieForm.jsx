@@ -36,10 +36,11 @@ class MovieForm extends Form {
     this.setState({ genres });
   }
   async populateMovie() {
-    const movieId = this.props.match.params.id;
-    if (movieId === "new") return;
-    //try catch block to catch the ex and redirect to not-found on 404
     try {
+      const movieId = this.props.match.params.id;
+      if (movieId === "new") return;
+
+      //try catch block to catch the ex and redirect to not-found on 404
       //read id parameter in the route and store it in movieID we dont need to populate with an existed obj
       const { data: movie } = await getMovie(movieId);
       this.setState({ data: this.mapToViewModel(movie) });
@@ -63,8 +64,8 @@ class MovieForm extends Form {
       dailyRentalRate: movie.dailyRentalRate,
     };
   }
-  doSubmit = () => {
-    saveMovie(this.state.data);
+  doSubmit = async () => {
+    await saveMovie(this.state.data);
     this.props.history.push("/movies");
   };
 
