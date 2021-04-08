@@ -40,10 +40,10 @@ class Movies extends Component {
   };
   //setting current page to 1 when navigating through other genres
   handleGenreSelect = (genre) => {
-    this.setState({ selectedGenre: genre, selectedGenre: "", currentPage: 1 });
+    this.setState({ selectedGenre: genre, searchQuery: "", currentPage: 1 });
   };
   handleSearch = (query) => {
-    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1 });
+    this.setState({ selectedGenre: null, searchQuery: query,  currentPage: 1 });
   };
   handleSort = (sortColumn) => {
     this.setState({ sortColumn });
@@ -53,6 +53,7 @@ class Movies extends Component {
       pageSize,
       currentPage,
       sortColumn,
+      searchQuery,
       selectedGenre,
       movies: allMovies,
     } = this.state;
@@ -66,7 +67,7 @@ class Movies extends Component {
     let filltered = allMovies;
     if (searchQuery)
       filltered = allMovies.filter((m) =>
-        m.title.toLowerCase().startWith(searchQuery.toLowerCase())
+        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     else if (selectedGenre && selectedGenre._id)
       filltered = allMovies.filter((m) => m.genre._id === selectedGenre._id);
@@ -81,7 +82,7 @@ class Movies extends Component {
   render() {
     // obj destructuring setin this.state.movie as count variable
     const { length: count } = this.state.movies;
-    const { pageSize, currentPage, sortColumn } = this.state;
+    const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
     if (count === 0) return <p>No movies scheduled for today</p>;
 
     const { totalCount, data: movies } = this.getPageData();
