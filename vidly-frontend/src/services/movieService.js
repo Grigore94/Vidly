@@ -13,7 +13,7 @@ export function getMovies() {
 }
 
 export function getMovie(movieId) {
-  return http.get(apiEndpoint + "/" + movieId);
+  return http.get(movieUrl(movieId));
 }
 
 export function saveMovie(movie) {
