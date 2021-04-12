@@ -11,6 +11,7 @@ import MovieForm from "./components/movieForm";
 import LoginForm from "./components/loginForm";
 import Logout from "./components/logout";
 import RegisterForm from "./components/registerForm";
+import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -18,12 +19,8 @@ class App extends Component {
   state = {};
 
   componentDidMount() {
-    try {
-      const jwt = localStorage.getItem("token");
-      const user = jwtDecode(jwt);
-      this.setState({ user });
-      //ignoring the error if the there is no web token in order to have the application crushed
-    } catch (ex) {}
+    const user = auth.getUser();
+    this.setState({ user });
   }
   render() {
     return (
