@@ -1,19 +1,25 @@
 import http from "./httpService";
+import jwtDecode from "jwt-decode";
 //obj destructuring for config
 import { apiUrl } from "../config.json";
 
 const apiEndpoint = apiUrl + "/auth";
+const tokenKey = "token";
 
 export async function login(email, password) {
   const {datat: jwt} = await http.post(apiEndpoint, { email, password });
-  localStorage.setItem("token", jwt);
+  localStorage.setItem(tokenKey, jwt);
+}
+export function loginJWT(jwt) {
+  localStorage.setItem(tokenKey, jwt);
+
 }
 export function logout() {
-  localStorage.removeItem("token");
+  localStorage.removeItem(tokenKey);
 }
 export function getUser() {
   try {
-    const jwt = localStorage.getItem("token");
+    const jwt = localStorage.getItem(tokenKey);
     return jwtDecode(jwt);
     //ignoring the error if the there is no web token in order to have the application crushed
   } catch (ex) {
@@ -23,6 +29,7 @@ export function getUser() {
 
  export default {
    login,
+   loginJWT,
    logout,
    getUser
  }
