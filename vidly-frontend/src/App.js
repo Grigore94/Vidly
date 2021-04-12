@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import jwtDecode from "jwt-decode";
 import Customers from "./components/customer";
 import Movies from "./components/movies";
 import NavBar from "./components/navBar";
@@ -13,10 +14,20 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
+  state = {};
+
+  componentDidMount() {
+    try {
+      const jwt = localStorage.getItem("token");
+      const user = jwtDecode(jwt);
+      this.setState({ user });
+      //ignoring the error if the there is no web token in order to have the application crushed
+    } catch (ex) {}
+  }
   render() {
     return (
       <React.Fragment>
-        <NavBar />
+        <NavBar user={this.state.user}/>
         <ToastContainer />
         <main className="container">
           <Switch>
