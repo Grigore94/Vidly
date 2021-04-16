@@ -9,12 +9,11 @@ const tokenKey = "token";
 http.setJwt(getJwt());
 
 export async function login(email, password) {
-  const {datat: jwt} = await http.post(apiEndpoint, { email, password });
+  const { datat: jwt } = await http.post(apiEndpoint, { email, password });
   localStorage.setItem(tokenKey, jwt);
 }
 export function loginJWT(jwt) {
   localStorage.setItem(tokenKey, jwt);
-
 }
 export function logout() {
   localStorage.removeItem(tokenKey);
@@ -29,13 +28,13 @@ export function getUser() {
   }
 }
 export function getJwt() {
-  return localStoragegetItem(tokenKey);
+  return localStorage.getItem(tokenKey);
 }
 
- export default {
-   login,
-   loginJWT,
-   logout,
-   getUser,
-   getJwt
- }
+export default {
+  login,
+  loginJWT,
+  logout,
+  getUser,
+  getJwt,
+};
