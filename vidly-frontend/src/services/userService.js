@@ -1,8 +1,6 @@
 import http from "./httpService";
-//obj destructuring for config
-import { apiUrl } from "../config.json";
 
-const apiEndpoint = apiUrl + "/users";
+const apiEndpoint = "/users";
 
 export function register(user) {
   return http.post(apiEndpoint, {

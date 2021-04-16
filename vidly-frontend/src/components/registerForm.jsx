@@ -20,7 +20,7 @@ class RegisterForm extends Form {
     try {
       const response = await userService.register(this.state.data);
       console.log(response);
-      auth.loginJWT(response.headers["x-auth-token"]);
+      auth.loginJwt(response.headers["x-auth-token"]);
       window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {

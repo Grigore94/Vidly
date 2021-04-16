@@ -1,9 +1,8 @@
 import http from "./httpService";
 import jwtDecode from "jwt-decode";
-//obj destructuring for config
-import { apiUrl } from "../config.json";
 
-const apiEndpoint = apiUrl + "/auth";
+
+const apiEndpoint = "/auth";
 const tokenKey = "token";
 
 http.setJwt(getJwt());
@@ -12,7 +11,7 @@ export async function login(email, password) {
   const { datat: jwt } = await http.post(apiEndpoint, { email, password });
   localStorage.setItem(tokenKey, jwt);
 }
-export function loginJWT(jwt) {
+export function loginJwt(jwt) {
   localStorage.setItem(tokenKey, jwt);
 }
 export function logout() {
@@ -33,7 +32,7 @@ export function getJwt() {
 
 export default {
   login,
-  loginJWT,
+  loginJwt,
   logout,
   getUser,
   getJwt,
