@@ -1,5 +1,4 @@
 import http from "./httpService";
-//obj destructuring for config
 
 const apiEndpoint = "/movies";
 
